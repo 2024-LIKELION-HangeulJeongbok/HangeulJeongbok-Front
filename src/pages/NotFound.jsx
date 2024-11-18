@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
-import font from "styles/font";
 
 const Text = styled.p`
   margin: 0;
-  ${() => font.regular_20}
+  font-size: 2rem;
 `;
 
 export default function NotFound() {
