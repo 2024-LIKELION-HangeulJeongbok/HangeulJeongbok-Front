@@ -3,7 +3,11 @@
     "baseUrl": "./src",
     "paths": {
       "*": ["*"],
-      "pages/*": ["pages/*"]
+      "assets/*": ["assets/*"],
+      "components/*": ["components/*"],
+      "pages/*": ["pages/*"],
+      "layouts/*": ["layouts/*"],
+      "styles/*": ["styles/*"]
     }
   },
   "include": ["src"]
