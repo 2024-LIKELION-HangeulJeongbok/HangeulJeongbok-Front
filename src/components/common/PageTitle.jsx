@@ -2,7 +2,7 @@ import styled from "styled-components";
 import font from "styles/font";
 
 const TitleText = styled.h2`
-  margin-top: 5.5rem;
+  margin-top: min(4.4vh, 3.6rem);
 
   display: flex;
   justify-content: center;

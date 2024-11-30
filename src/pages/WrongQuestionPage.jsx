@@ -1,7 +1,9 @@
+import PageTitle from "components/common/PageTitle";
+
 export default function WrongQuestionPage() {
   return (
     <>
-      <h2>WrongQuestionPage</h2>
+      <PageTitle pageTitle="틀린 문제" />
     </>
   );
 }

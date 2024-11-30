@@ -1,7 +1,11 @@
+import PageTitle from "components/common/PageTitle";
+import Pagenation from "components/pagenation/Pagenation";
+
 export default function SubjugationQuestionPage() {
   return (
     <>
-      <h2>SubjugationQuestionPage</h2>
+      <PageTitle pageTitle="문제 정복" />
+      <Pagenation />
     </>
   );
 }

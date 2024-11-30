@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function MainPage() {
   return (
     <>
-      <Link to="/">
+      <Link to="/main">
         <h2>MainPage</h2>
       </Link>
       <br />

@@ -49,9 +49,11 @@ const font = {
 
   // Nanum Gothic Coding
   ng_regular_20: FontNG({ weight: 400, size: 2.0 }),
+  ng_regular_24: FontNG({ weight: 400, size: 2.4 }),
   ng_bold_12: FontNG({ weight: 700, size: 1.2 }),
 
   // Inter
+  int_regular_16: FontInt({ weight: 400, size: 1.6 }),
   int_regular_20: FontInt({ weight: 400, size: 2.0 }),
 
   // Do Hyeon

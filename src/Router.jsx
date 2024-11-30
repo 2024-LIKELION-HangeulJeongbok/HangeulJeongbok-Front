@@ -14,7 +14,7 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<NotFound />} />
-        <Route path="/" element={<MainPage />} />
+        <Route path="/main" element={<MainPage />} />
 
         <Route path="/*" element={<TopbarLayout />}>
           {/* 점수 확인 */}
