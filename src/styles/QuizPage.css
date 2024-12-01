@@ -1,0 +1,241 @@
+.quiz-page-container {
+  font-family: "NanumGothicCoding", monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  height: 95vh;
+  background-image: url("../img/bg_img.png");
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9e7b7b;
+  display: flex;
+  align-items: center;
+}
+
+.back-icon {
+  margin-top: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.logo_quiz_div {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-right: 30px;
+}
+
+.quiz_logo {
+  width: 80px;
+}
+
+.progress-header {
+  margin: 5px;
+  margin-bottom: 10px;
+  padding: 5px 8px 5px 8px;
+  font-size: 1rem;
+  border: 1px solid #9e7b7b;
+}
+
+.progress-bar {
+  display: flex;
+  gap: 5px; /* 칸 간격 */
+  margin-bottom: 20px;
+  padding: 8px; /* 바 전체 패딩 */
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: #f1ec81; /* 바 전체 배경색 */
+  border-radius: 10px; /* 둥근 모서리 */
+  align-items: center;
+}
+
+.progress-box {
+  width: 18px; /* 네모 칸 크기 */
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white; /* 기본 배경색 */
+}
+
+.question {
+  margin: 30px;
+  margin-top: 50px;
+  font-size: 17px;
+  text-align: center;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* 선지와 'vs' 간격 조정 */
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px; /* 고정 너비 */
+  padding: 15px;
+  font-size: clamp(1.5rem, 2.5rem, 2.5rem); /* 폰트 크기 조정 */
+  font-family: "Do Hyeon", monospace;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px; /* 둥근 테두리 */
+  cursor: pointer;
+  border: 1px solid #bbb36f;
+  transition: all 0.3s ease; /* 부드러운 효과 */
+  word-wrap: break-word; /* 긴 단어 줄바꿈 */
+  overflow-wrap: break-word; /* 브라우저 호환성 */
+  white-space: normal; /* 줄바꿈 허용 */
+  height: auto; /* 텍스트 길이에 따라 높이 조정 */
+  min-height: 30px; /* 기본 높이 */
+}
+
+.option.dynamic {
+  font-size: clamp(1rem, 2vw, 2.5rem); /* 텍스트 길이에 따라 폰트 크기 조정 */
+  min-height: 30px; /* 기본 최소 높이 */
+  max-height: auto; /* 텍스트가 길면 높이 자동 조정 */
+}
+
+.option-text {
+  line-height: 1.2; /* 텍스트 간격 */
+}
+
+.option.yellow {
+  background-color: #f1ee9d; /* 노란 배경 */
+}
+
+.option.orange {
+  background-color: #f0af8a; /* 주황 배경 */
+}
+
+.option.yellow.selected {
+  border: 3px solid #4c73ff;
+}
+
+.option.orange.selected {
+  border: 3px solid #4c73ff;
+}
+
+.vs {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0 10px; /* 여백 */
+}
+
+.submit-button {
+  margin-top: 100px;
+  padding: 13px 60px;
+  font-size: 1.5rem;
+  background-color: #f7f5f5;
+  border: 1px solid #a1a1a1;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  color: #646464;
+  cursor: not-allowed;
+}
+
+.modal {
+  position: fixed;
+  top: 50%; /* 화면 세로의 절반 */
+  left: 50%; /* 화면 가로의 절반 */
+  transform: translate(-50%, -50%); /* 모달 크기의 절반만큼 이동 */
+  display: flex;
+  align-items: center; /* 세로 정렬 */
+  justify-content: center; /* 가로 정렬 */
+  width: auto; /* 필요한 경우 크기를 조정 */
+  height: auto; /* 필요한 경우 크기를 조정 */
+  z-index: 1000; /* 항상 최상단에 표시 */
+}
+
+.modal_end {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(217, 217, 217, 0.6); /* 배경 투명도 */
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  z-index: 1000; /* 최상단 표시 */
+}
+
+.modal_content_end {
+  position: relative;
+  background: #fbf8b2; /* 연한 노란색 배경 */
+  padding: 20px;
+  border-radius: 12px; /* 둥근 테두리 */
+  border: 1px solid #d0cfbb;
+  text-align: center; /* 텍스트 가운데 정렬 */
+  width: 190px; /* 모달 너비 */
+}
+
+.modal_content_end p {
+  font-size: 1.5rem;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modal_content_end .modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+}
+
+.modal_content_end .modal-close img {
+  width: 15px;
+  height: 15px;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: column; /* 버튼을 세로로 배치 */
+  align-items: center; /* 버튼을 중앙 정렬 */
+  gap: 10px; /* 버튼 간격 */
+  margin-top: 20px; /* 버튼과 텍스트 간격 */
+}
+
+.end_button,
+.return_button {
+  width: 110px;
+  height: 45px;
+  padding: 10px; /* 버튼 내부 여백 */
+  font-size: 1.2rem; /* 폰트 크기 */
+  color: #333; /* 텍스트 색상 */
+  background: #fff; /* 버튼 배경색 */
+  border: 1px solid #000000; /* 테두리 색상 */
+  border-radius: 5px; /* 둥근 테두리 */
+  cursor: pointer; /* 커서 변경 */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* 부드러운 효과 */
+}
+
+.end_button {
+  margin-top: 13px;
+}
+.return_button {
+  margin-bottom: 15px;
+}

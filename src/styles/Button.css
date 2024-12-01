@@ -1,0 +1,19 @@
+.custom-button {
+  width: 230px;
+  height: 60px;
+  padding: 1rem;
+  font-size: 1.7rem;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.custom-button:hover {
+  transform: scale(1.05);
+}
+
+.custom-button:active {
+  transform: scale(0.95);
+}

@@ -24,7 +24,7 @@ export default function Topbar() {
   const navigate = useNavigate();
 
   const handleMoveToMain = () => {
-    navigate(`/main`);
+    navigate(`/home`);
   };
 
   return (
