@@ -12,6 +12,8 @@ import SubjugationQuestionPage from "pages/SubjugationQuestionPage";
 import Home from "./pages/Home";
 import QuizPage from "./pages/QuizPage";
 import ScorePage from "./pages/ScorePage";
+import Login from "pages/Login";
+import Signup from "pages/Signup";
 
 export default function Router() {
   return (
@@ -35,6 +37,11 @@ export default function Router() {
         <Route path="/quiz" element={<QuizPage />} />
         {/* 점수 페이지 */}
         <Route path="/score" element={<ScorePage />} />
+
+        {/* 로그인 */}
+        <Route path="/login" element={<Login />} />
+        {/* 회원가입 */}
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );
