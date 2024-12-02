@@ -14,7 +14,7 @@ export default function NotFound() {
       <Link to="/landing">
         <Text>로그인 화면으로 가기</Text>
       </Link>
-      <Link to="/main">
+      <Link to="/home">
         <Text>메인 화면으로 가기</Text>
       </Link>
     </>
