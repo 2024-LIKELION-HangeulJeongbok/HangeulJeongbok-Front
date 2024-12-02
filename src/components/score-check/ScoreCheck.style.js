@@ -26,6 +26,8 @@ export const CompContainer = styled.li`
 
   border: 1px solid ${(props) => (props.$isEvenNum ? "rgba(174, 142, 142, 0.4)" : "#f1ec81")};
   background: ${(props) => (props.$isEvenNum ? "rgba(174, 142, 142, 0.25)" : "#fffdce")};
+
+  cursor: pointer;
 `;
 export const DateBox = styled.div`
   padding-left: min(1.5rem, 4vw);

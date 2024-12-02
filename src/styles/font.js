@@ -48,6 +48,7 @@ const font = {
   // (예시) thin(1), extralight(2), light(3), regular(4), medium(5), semibold(6), bold(7), extrabold(8), black(9)
 
   // Nanum Gothic Coding
+  ng_regular_12: FontNG({ weight: 400, size: 1.2 }),
   ng_regular_20: FontNG({ weight: 400, size: 2.0 }),
   ng_regular_24: FontNG({ weight: 400, size: 2.4 }),
   ng_bold_12: FontNG({ weight: 700, size: 1.2 }),
@@ -57,9 +58,11 @@ const font = {
   int_regular_20: FontInt({ weight: 400, size: 2.0 }),
 
   // Do Hyeon
+  do_regular_12: FontDH({ weight: 400, size: 1.2 }),
   do_regular_24: FontDH({ weight: 400, size: 2.4 }),
 
   // SeoulNamsan CM
+  sn_regular_12: FontSN({ weight: 400, size: 1.2 }),
   sn_regular_17: FontSN({ weight: 400, size: 1.7 }),
 };
 
