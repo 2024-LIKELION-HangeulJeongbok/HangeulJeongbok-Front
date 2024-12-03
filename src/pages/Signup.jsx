@@ -2,12 +2,13 @@ import { Input } from "components/Input/Input.style";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeaderLogo from "components/HeaderLogo/HeaderLogo";
-import SubmitBtn from "components/SubmitBtn/SubmitBtn";
-import { ContainerDiv, StyledForm } from "styles/Signup.style";
+import { ContainerDiv, ErrorMsg, P, PassCheckDiv, StyledForm } from "styles/Signup.style";
+import { SubmitBtn } from "components/SubmitBtn/SubmitBtn.style";
 
 const Signup = () => {
+  const navigate = useNavigate();
   // 유효성 검사
   const schema = yup.object().shape({
     id: yup.string().required(),
@@ -28,6 +29,10 @@ const Signup = () => {
   const onSubmit = (data) => {
     console.log("폼 데이터 제출");
     console.log(data);
+
+    if (data.password === data.passwordCheck) {
+      navigate("/login");
+    }
   };
   return (
     <ContainerDiv>
@@ -42,12 +47,22 @@ const Signup = () => {
 
           <Input type={"password"} {...register("password")} placeholder="비밀번호" />
 
-          <Input type={"password"} {...register("passwordCheck")} placeholder="비밀번호 확인" />
-          <p>{errors.passwordCheck?.message}</p>
+          <PassCheckDiv>
+            <Input
+              type={"password"}
+              {...register("passwordCheck")}
+              placeholder="비밀번호 확인"
+              className="passwordCheck"
+              style={{
+                border: errors.passwordCheck ? "1px solid red" : "",
+              }}
+            />
+            <ErrorMsg>
+              <P>{errors.passwordCheck?.message}</P>
+            </ErrorMsg>
+          </PassCheckDiv>
 
-          <Link to="/login">
-            <SubmitBtn type={"submit"} value={"회원가입"} />
-          </Link>
+          <SubmitBtn type={"submit"} value={"회원가입"} />
         </StyledForm>
       </div>
     </ContainerDiv>
