@@ -14,6 +14,8 @@ export const Input = styled.input`
   ${font.ng_regular_20}
   font-size:14px;
 
+  text-indent: 10px;
+
   &::placeholder {
     color: rgba(0, 0, 0, 0.45);
   }

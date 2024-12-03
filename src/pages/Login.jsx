@@ -31,7 +31,7 @@ const Login = () => {
 
   return (
     <ContainerDiv>
-      <div>
+      <div style={{ marginBottom: "-50px" }}>
         <HeaderLogo />
       </div>
       <div>
@@ -41,13 +41,16 @@ const Login = () => {
           <Input type={"password"} {...register("password")} placeholder="비밀번호" />
           <p message={errors.password?.message}></p>
 
-          <SubmitBtn type={"submit"} value={"로그인"} />
+          <Link to="/home">
+            <SubmitBtn type={"submit"} value={"로그인"} />
+          </Link>
         </StyledForm>
       </div>
 
       <TextDiv>
         <p>- 계정이 없으신가요? - </p>
-        <p>
+        <br></br>
+        <p style={{ fontWeight: "700", textDecoration: "underline" }}>
           <Link to="/signup">계정 생성</Link>
         </p>
       </TextDiv>

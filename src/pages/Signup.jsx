@@ -31,7 +31,7 @@ const Signup = () => {
   };
   return (
     <ContainerDiv>
-      <div>
+      <div style={{ marginBottom: "30px" }}>
         <Link to="/login">
           <HeaderLogo />
         </Link>

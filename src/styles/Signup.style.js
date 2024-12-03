@@ -6,10 +6,6 @@ export const ContainerDiv = styled(LoginContainerDiv)`
   justify-content: center;
 `;
 
-export const HeaderDiv = styled(MainHeaderDiv)`
-  margin-bottom: 30px;
-`;
-
 export const StyledForm = styled(LoginStyledForm)`
   height: 40vh;
 `;
