@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { ContainerDiv, StyledForm } from "styles/Login.style";
 import { ErrorMsg, P, PassCheckDiv } from "styles/Signup.style";
 import { useState } from "react";
+import Splash from "components/Splash/Splash";
 
 const Login = () => {
   // 로그인 상태 관리
@@ -49,40 +50,43 @@ const Login = () => {
   };
 
   return (
-    <ContainerDiv>
-      <div style={{ marginBottom: "-50px" }}>
-        <HeaderLogo />
-      </div>
-      <div>
-        <StyledForm onSubmit={handleSubmit(onSubmit)}>
-          <Input type={"text"} {...register("id")} placeholder="아이디" />
+    <>
+      <ContainerDiv>
+        <div style={{ marginBottom: "-50px" }}>
+          <HeaderLogo />
+        </div>
+        <div>
+          <StyledForm onSubmit={handleSubmit(onSubmit)}>
+            <Input type={"text"} {...register("id")} placeholder="아이디" />
 
-          <PassCheckDiv>
-            <Input
-              type={"password"}
-              {...register("password")}
-              placeholder="비밀번호"
-              style={{
-                border: errors.passwordCheck ? "1px solid red" : "",
-              }}
-            />
-            <ErrorMsg>
-              <P>{errors.password?.message}</P>
-            </ErrorMsg>
-          </PassCheckDiv>
+            <PassCheckDiv>
+              <Input
+                type={"password"}
+                {...register("password")}
+                placeholder="비밀번호"
+                style={{
+                  border: errors.passwordCheck ? "1px solid red" : "",
+                }}
+              />
+              <ErrorMsg>
+                <P>{errors.password?.message}</P>
+              </ErrorMsg>
+            </PassCheckDiv>
 
-          <SubmitBtn type={"submit"} value={"로그인"} />
-        </StyledForm>
-      </div>
+            <SubmitBtn type={"submit"} value={"로그인"} />
+          </StyledForm>
+        </div>
 
-      <TextDiv>
-        <p>- 계정이 없으신가요? - </p>
-        <br></br>
-        <p style={{ fontWeight: "700", textDecoration: "underline" }}>
-          <Link to="/signup">계정 생성</Link>
-        </p>
-      </TextDiv>
-    </ContainerDiv>
+        <TextDiv>
+          <p>- 계정이 없으신가요? - </p>
+          <br></br>
+          <p style={{ fontWeight: "700", textDecoration: "underline" }}>
+            <Link to="/signup">계정 생성</Link>
+          </p>
+        </TextDiv>
+      </ContainerDiv>
+      <Splash />
+    </>
   );
 };
 

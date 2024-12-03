@@ -23,4 +23,5 @@ export const ErrorMsg = styled.div`
 
 export const P = styled.p`
   color: red;
+  background: white;
 `;

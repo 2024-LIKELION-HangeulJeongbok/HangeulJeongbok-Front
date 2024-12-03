@@ -14,12 +14,13 @@ import QuizPage from "./pages/QuizPage";
 import ScorePage from "./pages/ScorePage";
 import Login from "pages/Login";
 import Signup from "pages/Signup";
+import Splash from "components/Splash/Splash";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Login />} />
 
         <Route element={<TopbarLayout />}>
           {/* 점수 확인 */}
@@ -42,6 +43,7 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         {/* 회원가입 */}
         <Route path="/signup" element={<Signup />} />
+        <Route path="/splash" element={<Splash />} />
       </Routes>
     </BrowserRouter>
   );
