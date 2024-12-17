@@ -26,12 +26,50 @@ const Signup = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (data) => {
-    console.log("폼 데이터 제출");
-    console.log(data);
+  const generateRandomUsername = () => {
+    return "익명" + Date.now() + Math.random().toString(36).substring(2, 15);
+  };
 
-    if (data.password === data.passwordCheck) {
-      navigate("/login");
+  const onSubmit = async (data) => {
+    console.log("폼 데이터 제출", data);
+
+    // 데이터 준비
+    const requestData = {
+      username: generateRandomUsername(),
+      userid: data.id,
+      password: data.password,
+      password2: data.passwordCheck,
+    };
+
+    try {
+      // API 요청
+      const response = await fetch("https://www.yuyujr.store/users/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      // 응답 처리
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result);
+
+        if (result.message === "회원가입에 실패했습니다.") {
+          alert(`${result.message}`);
+          return;
+        }
+
+        localStorage.setItem("token", result.token);
+
+        navigate("/login");
+      } else {
+        const errResult = await response.json();
+        console.log("회원가입 실패");
+      }
+    } catch (error) {
+      console.log("회원가입 요청 중 오류 발생", error);
     }
   };
   return (
