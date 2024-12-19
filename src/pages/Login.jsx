@@ -2,7 +2,7 @@ import { Input } from "components/Input/Input.style";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Form, Link, useNavigate } from "react-router-dom";
+import { Form, Link, useLocation, useNavigate } from "react-router-dom";
 import HeaderLogo from "components/HeaderLogo/HeaderLogo";
 import SubmitBtn from "components/SubmitBtn/SubmitBtn";
 import styled from "styled-components";
@@ -12,8 +12,8 @@ import { useState } from "react";
 import Splash from "components/Splash/Splash";
 
 const Login = () => {
-  // 로그인 상태 관리
-  const [isLoggedIn, setIsLoggined] = useState(false);
+  const location = useLocation();
+  const isRootPath = location.pathname === "/";
 
   const navigate = useNavigate();
 
@@ -122,7 +122,7 @@ const Login = () => {
           </p>
         </TextDiv>
       </ContainerDiv>
-      <Splash />
+      {isRootPath ? <Splash /> : <></>}
     </>
   );
 };
