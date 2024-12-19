@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import TopbarLayout from "layouts/TopbarLayout";
 
-import NotFound from "pages/NotFound";
+// import NotFound from "pages/NotFound";
 import CheckScorePage from "pages/CheckScorePage";
 import WrongQuestionPage from "pages/WrongQuestionPage";
 import SubjugationQuestionPage from "pages/SubjugationQuestionPage";
@@ -15,6 +15,7 @@ import ScorePage from "./pages/ScorePage";
 import Login from "pages/Login";
 import Signup from "pages/Signup";
 import Splash from "components/Splash/Splash";
+import ApiTestPage from "pages/ApiTestPage";
 
 export default function Router() {
   return (
@@ -29,6 +30,9 @@ export default function Router() {
           <Route path="/wrong-question" element={<WrongQuestionPage />} />
           {/* 문제 정복 */}
           <Route path="/subjugation-question" element={<SubjugationQuestionPage />} />
+
+          {/* api test */}
+          <Route path="/api" element={<ApiTestPage />} />
         </Route>
 
         {/* 추가한 경로 */}

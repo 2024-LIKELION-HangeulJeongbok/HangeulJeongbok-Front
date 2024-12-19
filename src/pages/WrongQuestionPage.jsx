@@ -3,6 +3,8 @@ import PageTitle from "components/common/PageTitle";
 import QuestionCard from "components/question-card/QuestionCard";
 import PrevIconSvg from "assets/icons/single-arrow-left.svg";
 import NextIconSvg from "assets/icons/single-arrow-right.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const QuestionCardList = styled.div`
   margin-top: 1.5rem;
@@ -29,32 +31,107 @@ const NavPageIcon = styled.img`
 `;
 
 export default function WrongQuestionPage() {
+  const [pageSelected, setPageSelected] = useState(1);
+  const [pageLength, setPageLength] = useState(1);
+  const [dataList, setDataList] = useState([]);
+  const [authToken, setAuthToken] = useState(null);
+
+  useEffect(() => {
+    setAuthToken(localStorage.getItem("token"));
+  }, []);
+  const api = axios.create({
+    baseURL: "https://www.yuyujr.store/",
+
+    headers: {
+      Authorization: `Token ${authToken}`,
+    },
+  });
+  async function getApi() {
+    try {
+      const response = await api.get(`quiz/history/incorrect/all/`);
+      setDataList(response.data.sessions[0].incorrect_questions);
+      setPageLength(Math.ceil(response.data.sessions[0].incorrect_questions.length / 2));
+
+      // console.log("api연결: ", response.data); // 성공
+    } catch (error) {
+      console.error("api연결 실패:", error.response?.data || error.message);
+    }
+  }
+  useEffect(() => {
+    if (authToken) {
+      getApi();
+    }
+  }, [authToken]);
+
   return (
     <>
       <PageTitle pageTitle="틀린 문제" />
 
-      <QuestionCardList>
-        <QuestionCard
-          questionText={"‘폐쇄' 또는 ‘마찰'의 단계를 거쳐 발음되는 소리가 없는 것은?"}
-          choice1={"오류"}
-          choice2={"회의"}
-          isTextLong={false}
-          answer={"오류"}
-        />
-        <QuestionCard
-          questionText={"형태소의 개수가 더 많은 것은?"}
-          choice1={"언니가 빵을 맛있게 먹었다. 언니가 빵을 맛있게 먹었다."}
-          choice2={"나는 높이뛰기를 꽤 잘했다."}
-          isTextLong={true}
-          answer={"나는 높이뛰기를 꽤 잘했다."}
-        />
-      </QuestionCardList>
+      {dataList.length > 0 ? (
+        <>
+          <QuestionCardList>
+            <QuestionCard
+              questionText={dataList[pageSelected * 2 - 2].question}
+              choice1={dataList[pageSelected * 2 - 2].options_list[0]}
+              choice2={dataList[pageSelected * 2 - 2].options_list[1]}
+              answer={
+                dataList[pageSelected * 2 - 2].options_list[
+                  dataList[pageSelected * 2 - 2].correct_answer - 1
+                ]
+              }
+              isTextLong={true}
+            />
+            {(dataList.length % 2 == 0 ||
+              Math.ceil((dataList.length + 1) / 2) !== pageSelected) && (
+              <QuestionCard
+                questionText={dataList[pageSelected * 2 - 1].question}
+                choice1={dataList[pageSelected * 2 - 1].options_list[0]}
+                choice2={dataList[pageSelected * 2 - 1].options_list[1]}
+                answer={
+                  dataList[pageSelected * 2 - 1].options_list[
+                    dataList[pageSelected * 2 - 1].correct_answer - 1
+                  ]
+                }
+                isTextLong={true}
+              />
+            )}
+          </QuestionCardList>
 
-      <PagenationContainer>
-        <NavPageIcon src={PrevIconSvg} alt="이전으로" />
-        <p> </p>
-        <NavPageIcon src={NextIconSvg} alt="다음으로" />
-      </PagenationContainer>
+          <PagenationContainer>
+            <NavPageIcon
+              onClick={() => setPageSelected(pageSelected !== 1 ? pageSelected - 1 : 1)}
+              src={PrevIconSvg}
+              alt="이전으로"
+            />
+            <p> </p>
+            <NavPageIcon
+              onClick={() =>
+                setPageSelected(pageLength !== pageSelected ? pageSelected + 1 : pageLength)
+              }
+              src={NextIconSvg}
+              alt="다음으로"
+            />
+          </PagenationContainer>
+        </>
+      ) : (
+        // 로딩 화면
+        <QuestionCardList>
+          <QuestionCard
+            questionText={"문제 로딩중..."}
+            choice1={"문제 로딩중..."}
+            choice2={"문제 로딩중..."}
+            starRating={0}
+            isTextLong={true}
+          />
+          <QuestionCard
+            questionText={"문제 로딩중..."}
+            choice1={"문제 로딩중..."}
+            choice2={"문제 로딩중..."}
+            starRating={0}
+            isTextLong={true}
+          />
+        </QuestionCardList>
+      )}
     </>
   );
 }

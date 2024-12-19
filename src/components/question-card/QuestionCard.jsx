@@ -1,6 +1,8 @@
 import * as S from "./QuestionCard.style";
 import StarOnSvg from "assets/icons/star-on.svg";
 import StarOffSvg from "assets/icons/star-off.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function QuestionCard({
   isTextLong = true,
@@ -9,7 +11,37 @@ export default function QuestionCard({
   choice2,
   answer,
   starRating = false,
+  starId,
 }) {
+  const [authToken, setAuthToken] = useState(null);
+  const [starNum, setStarNum] = useState(starRating);
+
+  useEffect(() => {
+    setAuthToken(localStorage.getItem("token"));
+  }, []);
+  const api = axios.create({
+    baseURL: "https://www.yuyujr.store/",
+
+    headers: {
+      Authorization: `Token ${authToken}`,
+    },
+  });
+  async function postApi(rateNum) {
+    try {
+      const response = await api.post(`quiz/history/${starId}/rate/`, {
+        rating: rateNum,
+      });
+      // console.log("starId: ", starId);
+      // console.log("api연결: ", response.data); // 성공
+    } catch (error) {
+      console.error("api연결 실패:", error.response?.data || error.message);
+    }
+  }
+  const handleBtn = (num) => {
+    setStarNum(num);
+    postApi(num);
+  };
+
   return (
     <>
       <S.CompContainer>
@@ -22,15 +54,25 @@ export default function QuestionCard({
           <S.ChoiceText>{choice2}</S.ChoiceText>
         </S.ChoiceContainer>
         <S.DividerLine />
-        {starRating !== false ? (
+        {starNum !== false ? (
           <>
             <S.SubTitleText>정복 정도</S.SubTitleText>
             <S.StarList>
-              {Array.from({ length: starRating }, (_, index) => (
-                <S.StarImg key={index} src={StarOnSvg} alt="채워진 별" />
+              {Array.from({ length: starNum }, (_, index) => (
+                <S.StarImg
+                  onClick={() => handleBtn(index + 1)}
+                  key={index}
+                  src={StarOnSvg}
+                  alt="채워진 별"
+                />
               ))}
-              {Array.from({ length: 5 - starRating }, (_, index) => (
-                <S.StarImg key={index} src={StarOffSvg} alt="빈 별" />
+              {Array.from({ length: 5 - starNum }, (_, index) => (
+                <S.StarImg
+                  onClick={() => handleBtn(starNum + index + 1)}
+                  key={index}
+                  src={StarOffSvg}
+                  alt="빈 별"
+                />
               ))}
             </S.StarList>
           </>
