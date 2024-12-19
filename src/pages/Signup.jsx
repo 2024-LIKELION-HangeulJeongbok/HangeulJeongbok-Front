@@ -11,8 +11,8 @@ const Signup = () => {
   const navigate = useNavigate();
   // 유효성 검사
   const schema = yup.object().shape({
-    id: yup.string().required(),
-    password: yup.string().min(8, "비밀번호는 8자 이상이어야 합니다.").matches(/[\W_]/, "특수 문자가 포함되어야 합니다.").required(),
+    id: yup.string().required("아이디를 입력해주세요."),
+    password: yup.string().min(8, "비밀번호는 8자 이상이어야 합니다.").matches(/[\W_]/, "특수 문자가 포함되어야 합니다.").required("비밀번호를 입력해주세요."),
     passwordCheck: yup.string().oneOf([yup.ref("password"), null], "비밀번호가 일치하지 않습니다."),
   });
 
@@ -81,7 +81,19 @@ const Signup = () => {
       </div>
       <div>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
-          <Input type={"text"} {...register("id")} placeholder="아이디" />
+          <PassCheckDiv>
+            <Input
+              type={"text"}
+              {...register("id")}
+              placeholder="아이디"
+              style={{
+                border: errors.id ? "1px solid red" : "",
+              }}
+            />
+            <ErrorMsg>
+              <P>{errors.id?.message}</P>
+            </ErrorMsg>
+          </PassCheckDiv>
 
           <PassCheckDiv>
             <Input
