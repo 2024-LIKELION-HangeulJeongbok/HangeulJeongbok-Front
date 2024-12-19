@@ -50,7 +50,7 @@ export default function WrongQuestionPage() {
     try {
       const response = await api.get(`quiz/history/incorrect/all/`);
       setDataList(response.data.sessions[0].incorrect_questions);
-      setPageLength(Math.ceil((response.data.sessions[0].incorrect_questions.length + 1) / 2));
+      setPageLength(Math.ceil(response.data.sessions[0].incorrect_questions.length / 2));
 
       // console.log("api연결: ", response.data); // 성공
     } catch (error) {
@@ -71,12 +71,12 @@ export default function WrongQuestionPage() {
         <>
           <QuestionCardList>
             <QuestionCard
-              questionText={dataList[pageSelected - 1].question}
-              choice1={dataList[pageSelected - 1].options_list[0]}
-              choice2={dataList[pageSelected - 1].options_list[1]}
+              questionText={dataList[pageSelected * 2 - 2].question}
+              choice1={dataList[pageSelected * 2 - 2].options_list[0]}
+              choice2={dataList[pageSelected * 2 - 2].options_list[1]}
               answer={
-                dataList[pageSelected - 1].options_list[
-                  dataList[pageSelected - 1].correct_answer - 1
+                dataList[pageSelected * 2 - 2].options_list[
+                  dataList[pageSelected * 2 - 2].correct_answer - 1
                 ]
               }
               isTextLong={true}
@@ -84,11 +84,13 @@ export default function WrongQuestionPage() {
             {(dataList.length % 2 == 0 ||
               Math.ceil((dataList.length + 1) / 2) !== pageSelected) && (
               <QuestionCard
-                questionText={dataList[pageSelected].question}
-                choice1={dataList[pageSelected].options_list[0]}
-                choice2={dataList[pageSelected].options_list[1]}
+                questionText={dataList[pageSelected * 2 - 1].question}
+                choice1={dataList[pageSelected * 2 - 1].options_list[0]}
+                choice2={dataList[pageSelected * 2 - 1].options_list[1]}
                 answer={
-                  dataList[pageSelected].options_list[dataList[pageSelected].correct_answer - 1]
+                  dataList[pageSelected * 2 - 1].options_list[
+                    dataList[pageSelected * 2 - 1].correct_answer - 1
+                  ]
                 }
                 isTextLong={true}
               />

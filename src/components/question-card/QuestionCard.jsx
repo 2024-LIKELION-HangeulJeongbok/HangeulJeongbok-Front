@@ -11,8 +11,10 @@ export default function QuestionCard({
   choice2,
   answer,
   starRating = false,
+  starId,
 }) {
   const [authToken, setAuthToken] = useState(null);
+  const [starNum, setStarNum] = useState(starRating);
 
   useEffect(() => {
     setAuthToken(localStorage.getItem("token"));
@@ -24,22 +26,20 @@ export default function QuestionCard({
       Authorization: `Token ${authToken}`,
     },
   });
-  async function postApi() {
+  async function postApi(rateNum) {
     try {
-      const response = await api.post(`quiz/history/incorrect/all/`);
-      // GET,POST-퀴즈응시 및 제출//
-      // const response = await api.post(`quiz/quizes/`, {
-      //   quiz_id: 10,
-      //   selected_option: 2,
-      // });
-
+      const response = await api.post(`quiz/history/${starId}/rate/`, {
+        rating: rateNum,
+      });
+      // console.log("starId: ", starId);
       // console.log("api연결: ", response.data); // 성공
     } catch (error) {
       console.error("api연결 실패:", error.response?.data || error.message);
     }
   }
-  const handleBtn = () => {
-    postApi();
+  const handleBtn = (num) => {
+    setStarNum(num);
+    postApi(num);
   };
 
   return (
@@ -54,15 +54,25 @@ export default function QuestionCard({
           <S.ChoiceText>{choice2}</S.ChoiceText>
         </S.ChoiceContainer>
         <S.DividerLine />
-        {starRating !== false ? (
+        {starNum !== false ? (
           <>
             <S.SubTitleText>정복 정도</S.SubTitleText>
             <S.StarList>
-              {Array.from({ length: starRating }, (_, index) => (
-                <S.StarImg onClick={handleBtn} key={index} src={StarOnSvg} alt="채워진 별" />
+              {Array.from({ length: starNum }, (_, index) => (
+                <S.StarImg
+                  onClick={() => handleBtn(index + 1)}
+                  key={index}
+                  src={StarOnSvg}
+                  alt="채워진 별"
+                />
               ))}
-              {Array.from({ length: 5 - starRating }, (_, index) => (
-                <S.StarImg onClick={handleBtn} key={index} src={StarOffSvg} alt="빈 별" />
+              {Array.from({ length: 5 - starNum }, (_, index) => (
+                <S.StarImg
+                  onClick={() => handleBtn(starNum + index + 1)}
+                  key={index}
+                  src={StarOffSvg}
+                  alt="빈 별"
+                />
               ))}
             </S.StarList>
           </>

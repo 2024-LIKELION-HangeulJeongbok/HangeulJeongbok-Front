@@ -56,26 +56,28 @@ export default function SubjugationQuestionPage() {
         <>
           <QuestionCardList>
             <QuestionCard
-              questionText={dataList[pageSelected - 1].question}
-              choice1={dataList[pageSelected - 1].options_list[0]}
-              choice2={dataList[pageSelected - 1].options_list[1]}
-              starRating={dataList[pageSelected - 1].rating}
+              questionText={dataList[pageSelected * 2 - 2].question}
+              choice1={dataList[pageSelected * 2 - 2].options_list[0]}
+              choice2={dataList[pageSelected * 2 - 2].options_list[1]}
+              starRating={dataList[pageSelected * 2 - 2].rating}
+              starId={dataList[pageSelected * 2 - 2].history_id}
               isTextLong={true}
             />
             {(dataList.length % 2 == 0 ||
               Math.ceil((dataList.length + 1) / 2) !== pageSelected) && (
               <QuestionCard
-                questionText={dataList[pageSelected].question}
-                choice1={dataList[pageSelected].options_list[0]}
-                choice2={dataList[pageSelected].options_list[1]}
-                starRating={dataList[pageSelected].rating}
+                questionText={dataList[pageSelected * 2 - 1].question}
+                choice1={dataList[pageSelected * 2 - 1].options_list[0]}
+                choice2={dataList[pageSelected * 2 - 1].options_list[1]}
+                starRating={dataList[pageSelected * 2 - 1].rating}
+                starId={dataList[pageSelected * 2 - 1].history_id}
                 isTextLong={true}
               />
             )}
           </QuestionCardList>
 
           <Pagenation
-            pageLength={Math.ceil((dataList.length + 1) / 2)}
+            pageLength={Math.ceil(dataList.length / 2)}
             pageSelected={pageSelected}
             setPageSelected={setPageSelected}
           />
