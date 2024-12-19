@@ -1,6 +1,8 @@
 import * as S from "./QuestionCard.style";
 import StarOnSvg from "assets/icons/star-on.svg";
 import StarOffSvg from "assets/icons/star-off.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function QuestionCard({
   isTextLong = true,
@@ -10,6 +12,36 @@ export default function QuestionCard({
   answer,
   starRating = false,
 }) {
+  const [authToken, setAuthToken] = useState(null);
+
+  useEffect(() => {
+    setAuthToken(localStorage.getItem("token"));
+  }, []);
+  const api = axios.create({
+    baseURL: "https://www.yuyujr.store/",
+
+    headers: {
+      Authorization: `Token ${authToken}`,
+    },
+  });
+  async function postApi() {
+    try {
+      const response = await api.post(`quiz/history/incorrect/all/`);
+      // GET,POST-퀴즈응시 및 제출//
+      // const response = await api.post(`quiz/quizes/`, {
+      //   quiz_id: 10,
+      //   selected_option: 2,
+      // });
+
+      // console.log("api연결: ", response.data); // 성공
+    } catch (error) {
+      console.error("api연결 실패:", error.response?.data || error.message);
+    }
+  }
+  const handleBtn = () => {
+    postApi();
+  };
+
   return (
     <>
       <S.CompContainer>
@@ -27,10 +59,10 @@ export default function QuestionCard({
             <S.SubTitleText>정복 정도</S.SubTitleText>
             <S.StarList>
               {Array.from({ length: starRating }, (_, index) => (
-                <S.StarImg key={index} src={StarOnSvg} alt="채워진 별" />
+                <S.StarImg onClick={handleBtn} key={index} src={StarOnSvg} alt="채워진 별" />
               ))}
               {Array.from({ length: 5 - starRating }, (_, index) => (
-                <S.StarImg key={index} src={StarOffSvg} alt="빈 별" />
+                <S.StarImg onClick={handleBtn} key={index} src={StarOffSvg} alt="빈 별" />
               ))}
             </S.StarList>
           </>
