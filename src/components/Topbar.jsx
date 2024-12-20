@@ -4,6 +4,7 @@ import BackIconSvg from "assets/icons/back-icon-brown.svg";
 import LogoSvg from "assets/logo/logo-83x33.svg";
 
 const CompContainer = styled.div`
+  margin-top: 2rem;
   padding: 1rem 1.4rem;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
