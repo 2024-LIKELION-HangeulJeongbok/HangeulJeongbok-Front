@@ -36,7 +36,7 @@ function QuizPage() {
       }
 
       const data = await response.json();
-      console.log("Fetched quiz data:", data); // 반환된 데이터 확인
+      // console.log("Fetched quiz data:", data); // 반환된 데이터 확인
 
       setCurrentQuiz(data); // 현재 퀴즈 데이터 설정
       setSelectedAnswer(null); // 선택 초기화
@@ -49,7 +49,7 @@ function QuizPage() {
   const submitAnswer = async () => {
     try {
       const url = `https://www.yuyujr.store/quiz/quizes/`;
-      console.log("Submitting answer to:", url);
+      // console.log("Submitting answer to:", url);
 
       const response = await fetch(url, {
         method: "POST",
@@ -68,7 +68,7 @@ function QuizPage() {
       }
 
       const data = await response.json();
-      console.log("Submitted answer response:", data);
+      // console.log("Submitted answer response:", data);
 
       // 결과와 다음 퀴즈 데이터 처리
       setProgress((prevProgress) => [...prevProgress, data.result]);

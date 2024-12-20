@@ -55,7 +55,7 @@ export default function WrongQuestionPageDetail() {
       setDataList(response.data.incorrect_questions);
       setPageLength(Math.ceil(response.data.incorrect_questions.length / 2));
 
-      console.log("api연결: ", response.data); // 성공
+      // console.log("api연결: ", response.data); // 성공
     } catch (error) {
       console.error("api연결 실패:", error.response?.data || error.message);
     }

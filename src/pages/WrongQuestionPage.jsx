@@ -49,8 +49,10 @@ export default function WrongQuestionPage() {
   async function getApi() {
     try {
       const response = await api.get(`quiz/history/incorrect/all/`);
-      setDataList(response.data.sessions[0].incorrect_questions);
-      setPageLength(Math.ceil(response.data.sessions[0].incorrect_questions.length / 2));
+      // setDataList(response.data.sessions[0].incorrect_questions);
+      // setPageLength(Math.ceil(response.data.sessions[0].incorrect_questions.length / 2));
+      setDataList(response.data.sessions);
+      setPageLength(Math.ceil(response.data.sessions.length / 2));
 
       console.log("api연결: ", response.data); // 성공
     } catch (error) {
@@ -71,12 +73,12 @@ export default function WrongQuestionPage() {
         <>
           <QuestionCardList>
             <QuestionCard
-              questionText={dataList[pageSelected * 2 - 2].question}
-              choice1={dataList[pageSelected * 2 - 2].options_list[0]}
-              choice2={dataList[pageSelected * 2 - 2].options_list[1]}
+              questionText={dataList[pageSelected * 2 - 2].incorrect_questions[0].question}
+              choice1={dataList[pageSelected * 2 - 2].incorrect_questions[0].options_list[0]}
+              choice2={dataList[pageSelected * 2 - 2].incorrect_questions[0].options_list[1]}
               answer={
-                dataList[pageSelected * 2 - 2].options_list[
-                  dataList[pageSelected * 2 - 2].correct_answer - 1
+                dataList[pageSelected * 2 - 2].incorrect_questions[0].options_list[
+                  dataList[pageSelected * 2 - 2].incorrect_questions[0].correct_answer - 1
                 ]
               }
               isTextLong={true}
@@ -84,12 +86,12 @@ export default function WrongQuestionPage() {
             {(dataList.length % 2 == 0 ||
               Math.ceil((dataList.length + 1) / 2) !== pageSelected) && (
               <QuestionCard
-                questionText={dataList[pageSelected * 2 - 1].question}
-                choice1={dataList[pageSelected * 2 - 1].options_list[0]}
-                choice2={dataList[pageSelected * 2 - 1].options_list[1]}
+                questionText={dataList[pageSelected * 2 - 1].incorrect_questions[0].question}
+                choice1={dataList[pageSelected * 2 - 1].incorrect_questions[0].options_list[0]}
+                choice2={dataList[pageSelected * 2 - 1].incorrect_questions[0].options_list[1]}
                 answer={
-                  dataList[pageSelected * 2 - 1].options_list[
-                    dataList[pageSelected * 2 - 1].correct_answer - 1
+                  dataList[pageSelected * 2 - 1].incorrect_questions[0].options_list[
+                    dataList[pageSelected * 2 - 1].incorrect_questions[0].correct_answer - 1
                   ]
                 }
                 isTextLong={true}
