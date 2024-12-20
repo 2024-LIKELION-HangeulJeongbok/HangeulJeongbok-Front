@@ -80,6 +80,7 @@ export default function WrongQuestionPageToday() {
                 ]
               }
               isTextLong={true}
+              isDark={true}
             />
             {(dataList.length % 2 == 0 ||
               Math.ceil((dataList.length + 1) / 2) !== pageSelected) && (
@@ -93,6 +94,7 @@ export default function WrongQuestionPageToday() {
                   ]
                 }
                 isTextLong={true}
+                isDark={true}
               />
             )}
           </QuestionCardList>

@@ -7,7 +7,7 @@ export const CompContainer = styled.div`
 
   border-radius: 3px;
   border: 1px solid #000;
-  background: #fffffa;
+  background: ${(props) => (props.$isDark ? "#e7f496" : "#fffffa")};
 `;
 export const SubTitleText = styled.p`
   margin: 1rem;

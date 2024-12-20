@@ -23,7 +23,7 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/*" element={<Login />} />
 
         <Route element={<TopbarLayout />}>
           {/* 점수 확인 */}

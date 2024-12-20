@@ -12,6 +12,7 @@ export default function QuestionCard({
   answer,
   starRating = false,
   starId,
+  isDark = false,
 }) {
   const [authToken, setAuthToken] = useState(null);
   const [starNum, setStarNum] = useState(starRating);
@@ -44,7 +45,7 @@ export default function QuestionCard({
 
   return (
     <>
-      <S.CompContainer>
+      <S.CompContainer $isDark={isDark}>
         <S.SubTitleText>문제</S.SubTitleText>
         <S.QuestionText>{questionText}</S.QuestionText>
         {/* 최대 7글자 */}
