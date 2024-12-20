@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../styles/QuizPage.css";
 
 function QuizPage() {
+  const [authToken, setAuthToken] = useState(null);
+
   const navigate = useNavigate();
   const [currentQuiz, setCurrentQuiz] = useState(null); // 현재 퀴즈 데이터
   const [progress, setProgress] = useState([]); // O/X 결과 저장
@@ -11,17 +13,21 @@ function QuizPage() {
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false); // 정답 여부
   const [showExitModal, setShowExitModal] = useState(false); // 종료 확인 모달
 
+  useEffect(() => {
+    setAuthToken(localStorage.getItem("token"));
+  }, []);
+
   // 초기 퀴즈 데이터를 GET 요청으로 가져오기
   const fetchQuizData = async () => {
     try {
       const url = `https://www.yuyujr.store/quiz/quizes/`;
-      console.log("Requesting quiz data from:", url);
+      // console.log("Requesting quiz data from:", url);
 
       const response = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Token 91828a74b2603b3604470e9525c39832c0d81c28", // 인증 토큰
+          Authorization: `Token ${authToken}`, // 인증 토큰
         },
       });
 
@@ -49,7 +55,7 @@ function QuizPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Token 91828a74b2603b3604470e9525c39832c0d81c28", // 인증 토큰
+          Authorization: `Token ${authToken}`, // 인증 토큰
         },
         body: JSON.stringify({
           quiz_id: currentQuiz.id,
@@ -86,8 +92,10 @@ function QuizPage() {
   };
 
   useEffect(() => {
-    fetchQuizData(); // 컴포넌트가 로드될 때 초기 퀴즈 데이터 요청
-  }, []);
+    if (authToken) {
+      fetchQuizData(); // 컴포넌트가 로드될 때 초기 퀴즈 데이터 요청
+    }
+  }, [authToken]);
 
   if (!currentQuiz) {
     return <div>Loading...</div>; // 데이터 로드 중
@@ -117,10 +125,16 @@ function QuizPage() {
           .map((_, index) => (
             <div
               key={index}
-              className={`progress-box ${progress[index] === "O" ? "correct" : progress[index] === "X" ? "wrong" : ""}`}
+              className={`progress-box ${
+                progress[index] === "O" ? "correct" : progress[index] === "X" ? "wrong" : ""
+              }`}
             >
-              {progress[index] === "O" && <img src={require("../img/p_o.png")} alt="정답" className="progress-icon" />}
-              {progress[index] === "X" && <img src={require("../img/p_x.png")} alt="오답" className="progress-icon" />}
+              {progress[index] === "O" && (
+                <img src={require("../img/p_o.png")} alt="정답" className="progress-icon" />
+              )}
+              {progress[index] === "X" && (
+                <img src={require("../img/p_x.png")} alt="오답" className="progress-icon" />
+              )}
             </div>
           ))}
       </div>
@@ -136,7 +150,9 @@ function QuizPage() {
           return (
             <React.Fragment key={index}>
               <div
-                className={`option ${index === 0 ? "yellow" : "orange"} ${selectedAnswer === index ? "selected" : ""}`}
+                className={`option ${index === 0 ? "yellow" : "orange"} ${
+                  selectedAnswer === index ? "selected" : ""
+                }`}
                 onClick={() => setSelectedAnswer(index)}
               >
                 <span className="option-text">{cleanedOption}</span>

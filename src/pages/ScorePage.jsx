@@ -78,7 +78,7 @@ function ScorePage() {
       </div>
 
       {/* 틀린 문제 보러가기 */}
-      <div className="wrong-answers-link" onClick={() => navigate("/wrong-question")}>
+      <div className="wrong-answers-link" onClick={() => navigate("/wrong-question/today")}>
         틀린 문제 보러 가기
       </div>
 

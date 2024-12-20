@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 import TopbarLayout from "layouts/TopbarLayout";
 
@@ -16,6 +16,8 @@ import Login from "pages/Login";
 import Signup from "pages/Signup";
 import Splash from "components/Splash/Splash";
 import ApiTestPage from "pages/ApiTestPage";
+import WrongQuestionPageDetail from "pages/WrongQuestionPageDetail";
+import WrongQuestionPageToday from "pages/WrongQuestionPageToday";
 
 export default function Router() {
   return (
@@ -27,7 +29,11 @@ export default function Router() {
           {/* 점수 확인 */}
           <Route path="/check-score" element={<CheckScorePage />} />
           {/* 틀린 문제 */}
-          <Route path="/wrong-question" element={<WrongQuestionPage />} />
+          <Route path="/wrong-question/" element={<Outlet />}>
+            <Route index element={<WrongQuestionPage />} />
+            <Route path="today" element={<WrongQuestionPageToday />} />
+            <Route path="detail" element={<WrongQuestionPageDetail />} />
+          </Route>
           {/* 문제 정복 */}
           <Route path="/subjugation-question" element={<SubjugationQuestionPage />} />
 

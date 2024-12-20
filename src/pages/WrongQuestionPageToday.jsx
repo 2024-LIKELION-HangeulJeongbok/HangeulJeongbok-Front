@@ -30,7 +30,7 @@ const NavPageIcon = styled.img`
   cursor: pointer;
 `;
 
-export default function WrongQuestionPage() {
+export default function WrongQuestionPageToday() {
   const [pageSelected, setPageSelected] = useState(1);
   const [pageLength, setPageLength] = useState(1);
   const [dataList, setDataList] = useState([]);
@@ -48,9 +48,9 @@ export default function WrongQuestionPage() {
   });
   async function getApi() {
     try {
-      const response = await api.get(`quiz/history/incorrect/all/`);
-      setDataList(response.data.sessions[0].incorrect_questions);
-      setPageLength(Math.ceil(response.data.sessions[0].incorrect_questions.length / 2));
+      const response = await api.get(`quiz/incorrect/`);
+      setDataList(response.data.incorrect_questions);
+      setPageLength(Math.ceil(response.data.incorrect_questions.length / 2));
 
       console.log("api연결: ", response.data); // 성공
     } catch (error) {
@@ -72,10 +72,10 @@ export default function WrongQuestionPage() {
           <QuestionCardList>
             <QuestionCard
               questionText={dataList[pageSelected * 2 - 2].question}
-              choice1={dataList[pageSelected * 2 - 2].options_list[0]}
-              choice2={dataList[pageSelected * 2 - 2].options_list[1]}
+              choice1={dataList[pageSelected * 2 - 2].options[0]}
+              choice2={dataList[pageSelected * 2 - 2].options[1]}
               answer={
-                dataList[pageSelected * 2 - 2].options_list[
+                dataList[pageSelected * 2 - 2].options[
                   dataList[pageSelected * 2 - 2].correct_answer - 1
                 ]
               }
@@ -85,10 +85,10 @@ export default function WrongQuestionPage() {
               Math.ceil((dataList.length + 1) / 2) !== pageSelected) && (
               <QuestionCard
                 questionText={dataList[pageSelected * 2 - 1].question}
-                choice1={dataList[pageSelected * 2 - 1].options_list[0]}
-                choice2={dataList[pageSelected * 2 - 1].options_list[1]}
+                choice1={dataList[pageSelected * 2 - 1].options[0]}
+                choice2={dataList[pageSelected * 2 - 1].options[1]}
                 answer={
-                  dataList[pageSelected * 2 - 1].options_list[
+                  dataList[pageSelected * 2 - 1].options[
                     dataList[pageSelected * 2 - 1].correct_answer - 1
                   ]
                 }

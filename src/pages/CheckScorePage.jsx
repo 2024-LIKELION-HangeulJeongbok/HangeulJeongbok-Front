@@ -24,7 +24,7 @@ export default function CheckScorePage() {
       const response = await api.get(`quiz/history/`);
       setDataList(response.data.history);
 
-      // console.log("api연결: ", response.data); // 성공
+      console.log("api연결: ", response.data); // 성공
     } catch (error) {
       console.error("api연결 실패:", error.response?.data || error.message);
     }
