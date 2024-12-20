@@ -42,6 +42,9 @@ export default function QuestionCard({
     setStarNum(num);
     postApi(num);
   };
+  useEffect(() => {
+    setStarNum(starRating);
+  }, [starRating]);
 
   return (
     <>

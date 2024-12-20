@@ -34,8 +34,9 @@ export default function SubjugationQuestionPage() {
   async function getApi() {
     try {
       const response = await api.get(`quiz/history/incorrect/all/`);
-      setDataList(response.data.sessions[0].incorrect_questions);
+      setDataList(response.data.sessions);
 
+      // setDataList(response.data.sessions[0].incorrect_questions);
       // console.log("api연결: ", response.data); // 성공
     } catch (error) {
       console.error("api연결 실패:", error.response?.data || error.message);
@@ -46,7 +47,8 @@ export default function SubjugationQuestionPage() {
       getApi();
     }
     // console.log(Math.ceil((dataList.length + 1) / 2));
-  }, [authToken]);
+    // console.log(dataList[pageSelected * 2 - 2].incorrect_questions[0].history_id);
+  }, [authToken, pageSelected]);
 
   return (
     <>
@@ -56,21 +58,21 @@ export default function SubjugationQuestionPage() {
         <>
           <QuestionCardList>
             <QuestionCard
-              questionText={dataList[pageSelected * 2 - 2].question}
-              choice1={dataList[pageSelected * 2 - 2].options_list[0]}
-              choice2={dataList[pageSelected * 2 - 2].options_list[1]}
-              starRating={dataList[pageSelected * 2 - 2].rating}
-              starId={dataList[pageSelected * 2 - 2].history_id}
+              questionText={dataList[pageSelected * 2 - 2].incorrect_questions[0].question}
+              choice1={dataList[pageSelected * 2 - 2].incorrect_questions[0].options_list[0]}
+              choice2={dataList[pageSelected * 2 - 2].incorrect_questions[0].options_list[1]}
+              starRating={dataList[pageSelected * 2 - 2].incorrect_questions[0].rating}
+              starId={dataList[pageSelected * 2 - 2].incorrect_questions[0].history_id}
               isTextLong={true}
             />
             {(dataList.length % 2 == 0 ||
               Math.ceil((dataList.length + 1) / 2) !== pageSelected) && (
               <QuestionCard
-                questionText={dataList[pageSelected * 2 - 1].question}
-                choice1={dataList[pageSelected * 2 - 1].options_list[0]}
-                choice2={dataList[pageSelected * 2 - 1].options_list[1]}
-                starRating={dataList[pageSelected * 2 - 1].rating}
-                starId={dataList[pageSelected * 2 - 1].history_id}
+                questionText={dataList[pageSelected * 2 - 1].incorrect_questions[0].question}
+                choice1={dataList[pageSelected * 2 - 1].incorrect_questions[0].options_list[0]}
+                choice2={dataList[pageSelected * 2 - 1].incorrect_questions[0].options_list[1]}
+                starRating={dataList[pageSelected * 2 - 1].incorrect_questions[0].rating}
+                starId={dataList[pageSelected * 2 - 1].incorrect_questions[0].history_id}
                 isTextLong={true}
               />
             )}
