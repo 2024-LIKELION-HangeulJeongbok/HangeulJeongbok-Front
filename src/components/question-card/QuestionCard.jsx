@@ -13,6 +13,7 @@ export default function QuestionCard({
   starRating = false,
   starId,
   isDark = false,
+  pageSelected,
 }) {
   const [authToken, setAuthToken] = useState(null);
   const [starNum, setStarNum] = useState(starRating);
@@ -44,7 +45,7 @@ export default function QuestionCard({
   };
   useEffect(() => {
     setStarNum(starRating);
-  }, [starRating]);
+  }, [pageSelected]);
 
   return (
     <>
