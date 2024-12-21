@@ -64,6 +64,7 @@ export default function SubjugationQuestionPage() {
               starRating={dataList[pageSelected * 2 - 2].incorrect_questions[0].rating}
               starId={dataList[pageSelected * 2 - 2].incorrect_questions[0].history_id}
               isTextLong={true}
+              pageSelected={pageSelected}
             />
             {(dataList.length % 2 == 0 ||
               Math.ceil((dataList.length + 1) / 2) !== pageSelected) && (
@@ -74,6 +75,7 @@ export default function SubjugationQuestionPage() {
                 starRating={dataList[pageSelected * 2 - 1].incorrect_questions[0].rating}
                 starId={dataList[pageSelected * 2 - 1].incorrect_questions[0].history_id}
                 isTextLong={true}
+                pageSelected={pageSelected}
               />
             )}
           </QuestionCardList>

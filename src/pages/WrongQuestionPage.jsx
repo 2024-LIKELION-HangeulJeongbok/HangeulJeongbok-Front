@@ -21,6 +21,12 @@ const PagenationContainer = styled.div`
 
   display: flex;
   justify-content: space-between;
+
+  position: fixed;
+  width: 80%;
+  bottom: 6.8rem;
+  left: 50%; /* 화면의 가로 중앙으로 설정 */
+  transform: translateX(-50%); /* 가로 중앙 정렬 */
 `;
 const NavPageIcon = styled.img`
   padding: 0.8rem;
@@ -54,7 +60,7 @@ export default function WrongQuestionPage() {
       setDataList(response.data.sessions);
       setPageLength(Math.ceil(response.data.sessions.length / 2));
 
-      console.log("api연결: ", response.data); // 성공
+      // console.log("api연결: ", response.data); // 성공
     } catch (error) {
       console.error("api연결 실패:", error.response?.data || error.message);
     }

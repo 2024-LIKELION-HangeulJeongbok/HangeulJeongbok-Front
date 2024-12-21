@@ -10,6 +10,11 @@ export const CompContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  position: fixed;
+  bottom: 7.2rem;
+  left: 50%; /* 화면의 가로 중앙으로 설정 */
+  transform: translateX(-50%); /* 가로 중앙 정렬 */
 `;
 export const IconContainer = styled.img`
   padding: 0.8rem;
